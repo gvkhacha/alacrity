@@ -7,6 +7,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
   * Wrapper class for Canvas to have a
@@ -37,7 +38,7 @@ class GameCanvas extends Canvas{
         gc.clearRect(0, 0, width, height);
         for(int i=0; i<contents.size(); i++){
             Rectangle r = contents.get(i);
-            gc.setFill(Color.RED);
+            gc.setFill(r.getFill());
             double xRatio = r.getX() / oldWidth;
             double yRatio = r.getY() / oldHeight;
             double wRatio = r.getWidth() / oldWidth;
@@ -75,8 +76,11 @@ class GameCanvas extends Canvas{
       * Rectangle is originally made in regards to the 
       * size of App.WINDOW_WIDTH and App.WINDOW_HEIGHT.
       * Can be scaled from there on.
+      * @param rect Rectangle to add with only x, y, width, height
+      * @param fill Paint fill configuration to use when drawing.
       */
-    void addRect(Rectangle rect){
+    void addRect(Rectangle rect, Paint fill){
+        rect.setFill(fill);
         contents.add(rect);
     }
 }
