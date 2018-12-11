@@ -19,6 +19,6 @@ public class TetrisGUI extends Pane{
         canvas.heightProperty().bind(heightProperty());
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        canvas.addRect(new Rectangle(75, 75, 100, 100), Color.BLUE);
+        canvas.addRect(new Rectangle(0.20, 0.20, 0.5, 0.5), Color.BLUE);
     }
 }

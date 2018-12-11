@@ -17,14 +17,10 @@ import javafx.scene.paint.Paint;
   */
 class GameCanvas extends Canvas{
     private ArrayList<Rectangle> contents;
-    private double oldWidth;
-    private double oldHeight;
     GameCanvas(){
         contents = new ArrayList<Rectangle>();
         widthProperty().addListener(evt -> draw());
         heightProperty().addListener(evt -> draw());
-        oldWidth = (double) App.WINDOW_WIDTH;
-        oldHeight = (double) App.WINDOW_HEIGHT;
     }
 
     private void draw(){
@@ -38,22 +34,10 @@ class GameCanvas extends Canvas{
         gc.clearRect(0, 0, width, height);
         for(int i=0; i<contents.size(); i++){
             Rectangle r = contents.get(i);
-            gc.setFill(r.getFill());
-            double xRatio = r.getX() / oldWidth;
-            double yRatio = r.getY() / oldHeight;
-            double wRatio = r.getWidth() / oldWidth;
-            double hRatio = r.getHeight() / oldWidth;
-
-            r.setX(xRatio * width);
-            r.setY(yRatio * height);
-            r.setWidth(wRatio * width);
-            r.setHeight(hRatio * height);
-
-            gc.fillRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+            
+            gc.fillRect(r.getX() * width, r.getY() * height,
+                 r.getWidth() * width, r.getHeight() * height);
         }
-
-        oldWidth = width;
-        oldHeight = height;
     }
 
     @Override
@@ -76,7 +60,7 @@ class GameCanvas extends Canvas{
       * Rectangle is originally made in regards to the 
       * size of App.WINDOW_WIDTH and App.WINDOW_HEIGHT.
       * Can be scaled from there on.
-      * @param rect Rectangle to add with only x, y, width, height
+      * @param rect Rectangle with x, y, width, and height being percentages.
       * @param fill Paint fill configuration to use when drawing.
       */
     void addRect(Rectangle rect, Paint fill){
