@@ -4,8 +4,8 @@ import java.awt.*;
 
 class IBlock extends Tetromino {
     private static final Point[][] tileConfig = {
-            {new Point(0, 0), new Point(0,1), new Point(0, 2), new Point(0, 3)},
-            {new Point(0, 0), new Point(1,0), new Point(2, 0), new Point(3, 0)}
+            {new Point(0,-2), new Point(0,-1), new Point(0,0), new Point(0,1)},
+            {new Point(-2,0), new Point(-1,0), new Point(0,0), new Point(1,0)}
     };
     private int index = 0;
     IBlock(){

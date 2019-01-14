@@ -1,3 +1,9 @@
+/**
+ * Tetrominos represent the blocks in a Tetris game. They can either be I, O, T, J, L, S, or Z blocks.
+ * https://en.wikipedia.org/wiki/Tetromino
+ * The Point is the basis of these blocks, and each Point represents the (row, column) pair of the piece
+ *    of the tetromino.
+ */
 package com.gvkhacha.tetris;
 
 import java.awt.*;
@@ -28,8 +34,8 @@ abstract class Tetromino {
     }
 
     void moveRight(){
-        if(row < Tetris.NUM_ROWS)
-            row++;
+        if(column < Tetris.NUM_ROWS)
+            column++;
     }
 
     abstract void rotateLeft();
