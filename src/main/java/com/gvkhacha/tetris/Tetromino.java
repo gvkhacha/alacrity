@@ -7,26 +7,34 @@ abstract class Tetromino {
     boolean frozen;
     int row;
     int column;
-    Point[] tiles;
 
     Tetromino(){
         frozen = false;
-        row = Tetris.NUM_ROWS / 2;
-        column = 0;
-        tiles = new Point[4];
+        column = Tetris.NUM_COLUMNS / 2;
+        row = 0;
     }
 
     boolean isFrozen(){
         return this.frozen;
     }
 
-    Point[] getTiles() { return this.tiles; }
+    void update(){
+        row++;
+    }
 
-    abstract void update();
+    void moveLeft(){
+        if(column > 0)
+            column--;
+    }
+
+    void moveRight(){
+        if(row < Tetris.NUM_ROWS)
+            row++;
+    }
 
     abstract void rotateLeft();
 
     abstract void rotateRight();
 
-
+    abstract Point[] getTiles();
 }

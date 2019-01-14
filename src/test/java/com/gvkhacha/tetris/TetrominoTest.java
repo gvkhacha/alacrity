@@ -9,6 +9,12 @@ import java.awt.*;
  * Unit test for all Tetrominos
  */
 public class TetrominoTest {
+    void testTiles(int[][] expected, Point[] actual){
+        for(int i=0; i<4; i++){
+            Assert.assertEquals(new Point(expected[i][0], expected[i][1]), actual[i]);
+        }
+    }
+
     @Test
     public void allTetrominosStartNotFrozen(){
         Tetromino[] tester = {new IBlock()};
@@ -20,10 +26,8 @@ public class TetrominoTest {
     public void defaultIBlockIsVerticalLine() {
         IBlock tester = new IBlock();
         Point[] tiles = tester.getTiles();
-        Assert.assertEquals(new Point(0, 0), tiles[0]);
-        Assert.assertEquals(new Point(0, 1), tiles[1]);
-        Assert.assertEquals(new Point(0, 2), tiles[2]);
-        Assert.assertEquals(new Point(0, 3), tiles[3]);
+        int[][] expected = {{0,0},{0, 1},{0, 2},{0, 3}};
+        testTiles(expected, tiles);
     }
 
     @Test
@@ -31,10 +35,8 @@ public class TetrominoTest {
         IBlock tester = new IBlock();
         tester.rotateLeft();
         Point[] tiles = tester.getTiles();
-        Assert.assertEquals(new Point(0, 0), tiles[0]);
-        Assert.assertEquals(new Point(1, 0), tiles[1]);
-        Assert.assertEquals(new Point(2, 0), tiles[2]);
-        Assert.assertEquals(new Point(3, 0), tiles[3]);
+        int[][] expected = {{0,0},{1,0},{2,0},{3,0}};
+        testTiles(expected, tiles);
     }
 
     @Test
@@ -42,10 +44,34 @@ public class TetrominoTest {
         IBlock tester = new IBlock();
         tester.rotateRight();
         Point[] tiles = tester.getTiles();
-        Assert.assertEquals(new Point(0, 0), tiles[0]);
-        Assert.assertEquals(new Point(1, 0), tiles[1]);
-        Assert.assertEquals(new Point(2, 0), tiles[2]);
-        Assert.assertEquals(new Point(3, 0), tiles[3]);
+        int[][] expected = {{0,0},{1,0},{2,0},{3,0}};
+        testTiles(expected, tiles);
     }
-    
+
+    @Test
+    public void IBlockDown() {
+        IBlock tester = new IBlock();
+        tester.update();
+        Point[] tiles = tester.getTiles();
+        int[][] expected = {{0,1},{0,2},{0,3},{0,4}};
+        testTiles(expected, tiles);
+    }
+
+    @Test
+    public void IBlockDownLeftDown() {
+        IBlock tester = new IBlock();
+        tester.update();
+        tester.rotateLeft();
+        tester.update();
+        Point[] tiles = tester.getTiles();
+        int[][] expected = {{0,2},{1,2},{2,2},{3,2}};
+        testTiles(expected, tiles);
+    }
+
+    @Test
+    public void IBlockMoveRight(){
+        IBlock tester = new IBlock();
+        tester.moveRight();
+        int[][] expected = {{1,0},{1,1},{1,2},{1,3}};
+    }
 }

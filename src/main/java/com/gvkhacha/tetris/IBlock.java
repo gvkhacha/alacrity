@@ -10,18 +10,6 @@ class IBlock extends Tetromino {
     private int index = 0;
     IBlock(){
         super();
-        this.tiles = tileConfig[index];
-    }
-
-    /**
-     * Drops the relative positions for the tetronimo.
-     * Tetris Game will have to consider collisions after update.
-     */
-    @Override
-    void update(){
-        for(int i=0; i<SIZE; i++){
-            this.tiles[i].translate(0, 1);
-        }
     }
 
     @Override
@@ -34,8 +22,17 @@ class IBlock extends Tetromino {
         rotate();
     }
 
+    @Override
+    Point[] getTiles(){
+        Point[] tiles = new Point[4];
+        for(int i=0; i<4; i++){
+            tiles[i] = new Point(tileConfig[index][i]);
+            tiles[i].translate(row, column);
+        }
+        return tiles;
+    }
+
     private void rotate(){
         index = index == 0 ? 1 : 0;
-        this.tiles = tileConfig[index];
     }
 }
