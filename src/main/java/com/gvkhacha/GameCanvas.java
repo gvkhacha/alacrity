@@ -23,7 +23,7 @@ class GameCanvas extends Canvas{
         heightProperty().addListener(evt -> draw());
     }
 
-    private void draw(){
+    void draw(){
         double width = getWidth();
         double height = getHeight();
         if(width == 0 || height == 0){

@@ -3,16 +3,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
+import javafx.scene.input.KeyEvent;
+import javafx.event.EventHandler;
 import com.gvkhacha.tetris.Tetris;
 import com.gvkhacha.tetris.Block;
-import java.util.Random;
 
 /**
   * 
   *
   */
-public class TetrisGUI extends Pane{
+public class TetrisGUI extends Pane implements EventHandler<KeyEvent>{
     private final GameCanvas canvas;
     private Tetris game;
     private static final double BOARD_MARGIN_X = 0.15;
@@ -33,8 +33,13 @@ public class TetrisGUI extends Pane{
         canvas.widthProperty().bind(widthProperty());
         canvas.heightProperty().bind(heightProperty());
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
         redraw();
+    }
+
+    public void handle(KeyEvent ke) {
+      game.update();
+      redraw();
+      canvas.draw();
     }
 
     private void redraw(){
@@ -62,6 +67,21 @@ public class TetrisGUI extends Pane{
               break;
             case CYAN:
               color = Color.CYAN;
+              break;
+            case YELLOW:
+              color = Color.YELLOW;
+              break;
+            case PURPLE:
+              color = Color.PURPLE;
+              break;
+            case BLUE:
+              color = Color.BLUE;
+              break;
+            case ORANGE:
+              color = Color.ORANGE;
+              break;
+            case GREEN:
+              color = Color.GREEN;
               break;
             default:
               color = Color.RED;

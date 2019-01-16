@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
   * JavaFX Application starting point
@@ -18,6 +23,8 @@ import javafx.event.ActionEvent;
 public class App extends Application implements EventHandler {
     public static final int WINDOW_WIDTH = 1000;
     public static final int WINDOW_HEIGHT = 1000;
+    private Scene scene;
+    private List<TetrisGUI> games;
 
     private TabPane mainTabs;
     public App(){
@@ -25,6 +32,8 @@ public class App extends Application implements EventHandler {
     }
 
     public void start (Stage stage){
+        games = new ArrayList<TetrisGUI>();
+
         Button gameBtn = new Button("Start");
         gameBtn.setOnAction(this);
         Group root = new Group(gameBtn);
@@ -38,7 +47,7 @@ public class App extends Application implements EventHandler {
         mainTabs.getTabs().add(main);
 
 
-        Scene scene = new Scene(mainTabs, 400, 300);
+        scene = new Scene(mainTabs, 400, 300);
 
 
         stage.setTitle("My JavaFX Application");
@@ -46,13 +55,27 @@ public class App extends Application implements EventHandler {
         stage.setWidth(WINDOW_WIDTH);
         stage.setHeight(WINDOW_HEIGHT);
         stage.show();
+
+        mainTabs.getSelectionModel().selectedItemProperty().addListener(
+        new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
+                int index = mainTabs.getSelectionModel().getSelectedIndex();
+                if(index != 0)
+                    scene.setOnKeyPressed(games.get(index-1));
+        }
+    }
+);
     }
 
     @Override
     public void handle(Event e){
         Tab gameTab = new Tab();
         gameTab.setText("Tetris");
-        gameTab.setContent(new TetrisGUI());
+        TetrisGUI game = new TetrisGUI();
+        games.add(game);
+        gameTab.setContent(game);
+        
         mainTabs.getTabs().add(gameTab);
     }
     public static void main (String[] args){
