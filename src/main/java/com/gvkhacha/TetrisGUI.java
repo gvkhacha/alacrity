@@ -13,6 +13,11 @@ import com.gvkhacha.tetris.Tetris;
 public class TetrisGUI extends Pane{
     private final GameCanvas canvas;
     private Tetris game;
+    private static final double BOARD_MARGIN_X = 0.15;
+    private static final double BOARD_MARGIN_Y = 0.10;
+    private static final Color board_fill = Color.CYAN;
+    private static final Rectangle board = new Rectangle(BOARD_MARGIN_X, BOARD_MARGIN_Y, 
+                                              1 - (2 * BOARD_MARGIN_X), 1 - (2 * BOARD_MARGIN_Y));
     TetrisGUI(){
         super();
         game = new Tetris();
@@ -28,7 +33,7 @@ public class TetrisGUI extends Pane{
 
     private void redraw(){
       canvas.clear();
-      canvas.addRect(new Rectangle(0.20, 0.20, 0.5, 0.5), Color.CYAN);
+      canvas.addRect(board, board_fill);
     }
 
 }

@@ -8,8 +8,8 @@ enum Block{
 
 
 public class Tetris {
-    static int NUM_ROWS = 20;
-    static int NUM_COLUMNS = 10;
+    public static int NUM_ROWS = 20;
+    public static int NUM_COLUMNS = 10;
     private Block[][] board;
     private Tetromino faller;
 
