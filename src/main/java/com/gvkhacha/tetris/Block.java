@@ -1,5 +1,5 @@
 package com.gvkhacha.tetris;
 
-public enum Block{
+public enum Block {
     EMPTY, CYAN, PURPLE, YELLOW, BLUE, ORANGE, GREEN, RED;
 }

@@ -27,11 +27,11 @@ public class App extends Application implements EventHandler {
     private List<GameGUI> games;
 
     private TabPane mainTabs;
-    public App(){
+    public App() {
         System.out.println("Created");
     }
 
-    public void start (Stage stage){
+    public void start (Stage stage) {
         games = new ArrayList<GameGUI>();
 
         Button gameBtn = new Button("Start");
@@ -62,23 +62,23 @@ public class App extends Application implements EventHandler {
             public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
                 int index = mainTabs.getSelectionModel().getSelectedIndex();
                 if(index != 0)
-                    scene.setOnKeyPressed(games.get(index-1));
+                    scene.setOnKeyPressed(games.get(index - 1));
+            }
         }
-    }
-);
+        );
     }
 
     @Override
-    public void handle(Event e){
+    public void handle(Event e) {
         Tab gameTab = new Tab();
         gameTab.setText("Tetris");
         TetrisGUI game = new TetrisGUI();
         games.add(game);
         gameTab.setContent(game);
-        
+
         mainTabs.getTabs().add(gameTab);
     }
-    public static void main (String[] args){
+    public static void main (String[] args) {
         launch(args);
     }
 }

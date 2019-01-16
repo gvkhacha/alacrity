@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.awt.Point;
 
-enum Type{
+enum Type {
     IBlock,
     TBlock,
     OBlock,
@@ -79,13 +79,13 @@ class Tetromino {
             {{0, 0}, {-1, 0}, {-1, 1}, {-2, 1}},
             {{-1, 0}, {-1, 1}, {0, 1}, {0, 2}}
         }
-    }; 
+    };
 
     /**
       * Default constructor will make a tetormino in the middle of the board,
-      * on the first row, and of random type. 
+      * on the first row, and of random type.
       */
-    Tetromino(){
+    Tetromino() {
         frozen = false;
         column = Tetris.NUM_COLUMNS / 2;
         row = 0;
@@ -93,15 +93,15 @@ class Tetromino {
         index = 0;
     }
 
-    Tetromino(int t){
+    Tetromino(int t) {
         frozen = false;
         column = Tetris.NUM_COLUMNS / 2;
         row = 0;
         type = BLOCK_TYPES.get(t);
-        index = 0;   
+        index = 0;
     }
 
-    Tetromino(Tetromino copy){
+    Tetromino(Tetromino copy) {
         frozen = false;
         column = copy.column;
         row = copy.row;
@@ -109,43 +109,43 @@ class Tetromino {
         index = copy.index;
     }
 
-    boolean isFrozen(){
+    boolean isFrozen() {
         return this.frozen;
     }
 
-    int getIntType(){
+    int getIntType() {
         return this.type.ordinal();
     }
 
-    void update(){
+    void update() {
         row++;
     }
 
-    void moveLeft(){
+    void moveLeft() {
         if(column > 0)
             column--;
     }
 
-    void moveRight(){
+    void moveRight() {
         if(column < Tetris.NUM_ROWS)
             column++;
     }
 
-    void rotateRight(){
+    void rotateRight() {
         // add by 1, unless at 3, loop back to 0.
         index = index == 3 ? 0 : index + 1;
     }
 
-    void rotateLeft(){
+    void rotateLeft() {
         // Subtract by 1, unless at 0, loop back to 3
-        index = index == 0 ? 3: index - 1;
+        index = index == 0 ? 3 : index - 1;
     }
 
-    Point[] getTiles(){
+    Point[] getTiles() {
         Point[] tiles = new Point[4];
-        for(int i=0; i<4; i++){
+        for(int i = 0; i < 4; i++) {
             tiles[i] = new Point(tileConfig[type.ordinal()][index][i][0],
-                tileConfig[type.ordinal()][index][i][1]);
+                                 tileConfig[type.ordinal()][index][i][1]);
             tiles[i].translate(row, column);
         }
         return tiles;
