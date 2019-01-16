@@ -101,6 +101,14 @@ class Tetromino {
         index = 0;   
     }
 
+    Tetromino(Tetromino copy){
+        frozen = false;
+        column = copy.column;
+        row = copy.row;
+        type = copy.type;
+        index = copy.index;
+    }
+
     boolean isFrozen(){
         return this.frozen;
     }
