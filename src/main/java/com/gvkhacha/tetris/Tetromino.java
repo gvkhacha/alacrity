@@ -15,6 +15,11 @@ import java.awt.Point;
 enum Type{
     IBlock,
     TBlock,
+    OBlock,
+    JBlock,
+    LBlock,
+    SBlock,
+    ZBlock
 }
 
 class Tetromino {
@@ -29,6 +34,7 @@ class Tetromino {
     private static final int TYPES_SIZE = BLOCK_TYPES.size();
     private static final Random rand = new Random();
     // All tile configs for each block lies here. Index is corresponding to Type enum.
+    // First index is the row, second index is the column difference.
     private static final int[][][][] tileConfig = {
         {
             {{0, -2}, {0, -1}, {0, 0}, {0, 1}},
@@ -41,8 +47,39 @@ class Tetromino {
             {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
             {{0, -1}, {0, 0}, {0, 1}, {1, 0}},
             {{-1, 0}, {0, 0}, {1, 0}, {0, -1}}
+        },
+        {
+            {{0, 0}, {-1, 0}, {0, 1}, {-1, 1}},
+            {{0, 0}, {-1, 0}, {0, 1}, {-1, 1}},
+            {{0, 0}, {-1, 0}, {0, 1}, {-1, 1}},
+            {{0, 0}, {-1, 0}, {0, 1}, {-1, 1}}
+        },
+        {
+            {{-2, 0}, {-1, 0}, {0, 0}, {0, 1}},
+            {{-2, 2}, {-1, 2}, {-1, 1}, {-1, 0}},
+            {{-2, 0}, {-2, 1}, {-1, 1}, {0, 1}},
+            {{-1, 2}, {-1, 1}, {-1, 0}, {0, 0}}
+
+        },
+        {
+            {{-2, 0}, {-1, 0}, {0, 0}, {0, 1}},
+            {{-2, 0}, {-1, 0}, {-1, 1}, {-1, 2}},
+            {{-2, 1}, {-1, 1}, {0, 1}, {0, 0}},
+            {{-1, 0}, {-1, 1}, {-1, 2}, {0, 2}}
+        },
+        {
+            {{-2, 0}, {-1, 0}, {-1, 1}, {0, 1}},
+            {{0, 0}, {0, 1}, {-1, 1}, {-1, 2}},
+            {{-2, 0}, {-1, 0}, {-1, 1}, {0, 1}},
+            {{0, 0}, {0, 1}, {-1, 1}, {-1, 2}}
+        },
+        {
+            {{0, 0}, {-1, 0}, {-1, 1}, {-2, 1}},
+            {{-1, 0}, {-1, 1}, {0, 1}, {0, 2}},
+            {{0, 0}, {-1, 0}, {-1, 1}, {-2, 1}},
+            {{-1, 0}, {-1, 1}, {0, 1}, {0, 2}}
         }
-    };
+    }; 
 
     /**
       * Default constructor will make a tetormino in the middle of the board,
