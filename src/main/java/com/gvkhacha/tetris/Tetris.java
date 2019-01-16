@@ -13,7 +13,7 @@ public class Tetris {
     private Block[][] board;
     private Tetromino faller;
 
-    Tetris(){
+    public Tetris(){
         this.board = new Block[NUM_ROWS][NUM_COLUMNS];
         for(int r=0; r<NUM_ROWS; r++){
             for(int c=0; c<NUM_COLUMNS; c++){
@@ -28,9 +28,10 @@ public class Tetris {
       * if the next tick of the faller will collide with any block on the board
       * the blocks are frozen and placed in the board, and a new faller is made. 
       */
-    void update(){
+    public void update(){
         if(checkCollisions()){
             Block fallerColor = Block.values()[1 + faller.getIntType()];
+            Point[] tiles = this.faller.getTiles();
             for(Point p : tiles){
                 this.board[(int)p.getX()][(int)p.getY()] = fallerColor;
             }
@@ -63,7 +64,7 @@ public class Tetris {
      * @param c column number on board
      * @return Single Block at location
      */
-    Block tileAt(int r, int c){
+    public Block tileAt(int r, int c){
         return this.board[r][c];
     }
 }

@@ -34,7 +34,8 @@ class GameCanvas extends Canvas{
         gc.clearRect(0, 0, width, height);
         for(int i=0; i<contents.size(); i++){
             Rectangle r = contents.get(i);
-            
+            Color fill = (Color) r.getFill();
+            gc.setFill(fill);
             gc.fillRect(r.getX() * width, r.getY() * height,
                  r.getWidth() * width, r.getHeight() * height);
         }
@@ -66,5 +67,9 @@ class GameCanvas extends Canvas{
     void addRect(Rectangle rect, Paint fill){
         rect.setFill(fill);
         contents.add(rect);
+    }
+
+    void clear(){
+      getGraphicsContext2D().clearRect(0, 0, getWidth(), getHeight());
     }
 }
