@@ -23,4 +23,10 @@ public class TetrominoTest {
     	Assert.assertArrayEquals(expectedFirst, first.getTiles());
     	Assert.assertArrayEquals(expectedSecond, second.getTiles());
     }
+
+    @Test
+    public void getTypeIntFromFaller(){
+    	Tetromino tester = new Tetromino(3);
+    	Assert.assertEquals(3, tester.getIntType());
+    }
 }

@@ -113,6 +113,10 @@ class Tetromino {
         return this.frozen;
     }
 
+    int getIntType(){
+        return this.type.ordinal();
+    }
+
     void update(){
         row++;
     }
