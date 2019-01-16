@@ -1,12 +1,6 @@
 package com.gvkhacha.tetris;
 import java.awt.Point;
 
-// Blocks are in same order as tetromino types enum
-enum Block{
-    EMPTY, CYAN, YELLOW, PURPLE, BLUE, ORANGE, GREEN, RED;
-}
-
-
 public class Tetris {
     public static int NUM_ROWS = 20;
     public static int NUM_COLUMNS = 10;
@@ -65,6 +59,10 @@ public class Tetris {
      * @return Single Block at location
      */
     public Block tileAt(int r, int c){
-        return this.board[r][c];
+      for(Point p : this.faller.getTiles()){
+        if(r == p.getX() && c == p.getY())
+          return Block.values()[1 + faller.getIntType()];
+      }
+      return this.board[r][c];
     }
 }
