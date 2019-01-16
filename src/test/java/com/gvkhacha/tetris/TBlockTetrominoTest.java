@@ -7,7 +7,7 @@ import org.junit.experimental.theories.suppliers.TestedOn;
 import java.awt.*;
 
 /**
- * Unit test for TBlocks.
+ * Unit test for Tetrominos.
  */
 public class TBlockTetrominoTest {
     private void testTiles(int[][] expected, Point[] actual){
@@ -18,7 +18,7 @@ public class TBlockTetrominoTest {
     private static final int MID = Tetris.NUM_COLUMNS / 2;
     @Test
     public void defaultTilesUpright() {
-        TBlock tester = new TBlock();
+        Tetromino tester = new Tetromino(1);
         Point[] tiles = tester.getTiles();
         int[][] expected = {{0,MID-1},{0, MID},{0, MID+1},{-1, MID}};
         testTiles(expected, tiles);
@@ -26,7 +26,7 @@ public class TBlockTetrominoTest {
 
     @Test
     public void rotateLeftIsFacesLeft() {
-        TBlock tester = new TBlock();
+        Tetromino tester = new Tetromino(1);
         tester.rotateLeft();
         Point[] tiles = tester.getTiles();
         int[][] expected = {{-1,MID},{0, MID},{1, MID},{0, MID-1}};
@@ -35,7 +35,7 @@ public class TBlockTetrominoTest {
 
     @Test
     public void rotateRightIsVerticalLine() {
-        TBlock tester = new TBlock();
+        Tetromino tester = new Tetromino(1);
         tester.rotateRight();
         Point[] tiles = tester.getTiles();
         int[][] expected = {{-1,MID},{0, MID},{1, MID},{0, MID+1}};
@@ -44,7 +44,7 @@ public class TBlockTetrominoTest {
 
     @Test
     public void rotateRightTwiceForUpsideDown(){
-        TBlock tester = new TBlock();
+        Tetromino tester = new Tetromino(1);
         tester.rotateRight();
         tester.rotateRight();
         Point[] tiles = tester.getTiles();
@@ -54,17 +54,17 @@ public class TBlockTetrominoTest {
 
     @Test
     public void rotateBackToOriginal(){
-        TBlock t1 = new TBlock();
+        Tetromino t1 = new Tetromino(1);
         t1.rotateRight();
         t1.rotateLeft();
 
-        TBlock t2 = new TBlock();
+        Tetromino t2 = new Tetromino(1);
         t2.rotateLeft();
         t2.rotateLeft();
         t2.rotateLeft();
         t2.rotateLeft();
 
-        TBlock t3 = new TBlock();
+        Tetromino t3 = new Tetromino(1);
         t3.rotateRight();
         t3.rotateRight();
         t3.rotateRight();
@@ -78,7 +78,7 @@ public class TBlockTetrominoTest {
 
     @Test
     public void moveDown() {
-        TBlock tester = new TBlock();
+        Tetromino tester = new Tetromino(1);
         tester.update();
         int[][] expected = {{1,MID-1},{1, MID},{1, MID+1},{0, MID}};
         testTiles(expected, tester.getTiles());

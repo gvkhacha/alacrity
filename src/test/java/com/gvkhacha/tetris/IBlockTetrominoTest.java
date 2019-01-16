@@ -17,7 +17,7 @@ public class IBlockTetrominoTest {
     private static final int MID = Tetris.NUM_COLUMNS / 2;
     @Test
     public void defaultIsHorizontalLine() {
-        IBlock tester = new IBlock();
+        Tetromino tester = new Tetromino(0);
         Point[] tiles = tester.getTiles();
         int[][] expected = {{0,MID-2},{0, MID-1},{0, MID},{0, MID+1}};
         testTiles(expected, tiles);
@@ -25,7 +25,7 @@ public class IBlockTetrominoTest {
 
     @Test
     public void rotateLeftIsVerticalLine() {
-        IBlock tester = new IBlock();
+        Tetromino tester = new Tetromino(0);
         tester.rotateLeft();
         Point[] tiles = tester.getTiles();
         int[][] expected = {{-2,MID},{-1, MID},{0, MID},{1, MID}};
@@ -34,7 +34,7 @@ public class IBlockTetrominoTest {
 
     @Test
     public void rotateRightIsVerticalLine() {
-        IBlock tester = new IBlock();
+        Tetromino tester = new Tetromino(0);
         tester.rotateRight();
         Point[] tiles = tester.getTiles();
         int[][] expected = {{-2,MID},{-1, MID},{0, MID},{1, MID}};
@@ -43,7 +43,7 @@ public class IBlockTetrominoTest {
 
     @Test
     public void moveDown() {
-        IBlock tester = new IBlock();
+        Tetromino tester = new Tetromino(0);
         tester.update();
         Point[] tiles = tester.getTiles();
         int[][] expected = {{1,MID-2},{1, MID-1},{1, MID},{1, MID+1}};
@@ -52,7 +52,7 @@ public class IBlockTetrominoTest {
 
     @Test
     public void downRotateLeftDown() {
-        IBlock tester = new IBlock();
+        Tetromino tester = new Tetromino(0);
         tester.update();
         tester.rotateLeft();
         tester.update();
@@ -63,7 +63,7 @@ public class IBlockTetrominoTest {
 
     @Test
     public void moveRight(){
-        IBlock tester = new IBlock();
+        Tetromino tester = new Tetromino(0);
         tester.moveRight();
         Point[] tiles = tester.getTiles();
         int[][] expected = {{0,MID-1},{0, MID},{0, MID+1},{0, MID+2}};
@@ -72,7 +72,7 @@ public class IBlockTetrominoTest {
 
     @Test
     public void moveLeft(){
-        IBlock tester = new IBlock();
+        Tetromino tester = new Tetromino(0);
         tester.moveLeft();
         Point[] tiles = tester.getTiles();
         int[][] expected = {{0,MID-3},{0, MID-2},{0, MID-1},{0, MID}};
@@ -81,7 +81,7 @@ public class IBlockTetrominoTest {
 
     @Test
     public void moveLeftAndRotate(){
-        IBlock tester = new IBlock();
+        Tetromino tester = new Tetromino(0);
         tester.moveLeft();
         tester.rotateLeft();
         Point[] tiles = tester.getTiles();
