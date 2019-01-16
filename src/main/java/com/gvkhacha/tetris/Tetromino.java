@@ -6,9 +6,11 @@
  */
 package com.gvkhacha.tetris;
 
-import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.Random;
+import java.awt.Point;
 
 enum Type{
     IBlock,
@@ -27,18 +29,18 @@ class Tetromino {
     private static final int TYPES_SIZE = BLOCK_TYPES.size();
     private static final Random rand = new Random();
     // All tile configs for each block lies here. Index is corresponding to Type enum.
-    private static final Point[][][] tileConfig = {
+    private static final int[][][][] tileConfig = {
         {
-            {new Point(0,-2), new Point(0,-1), new Point(0,0), new Point(0,1)},
-            {new Point(-2,0), new Point(-1,0), new Point(0,0), new Point(1,0)},
-            {new Point(0,-2), new Point(0,-1), new Point(0,0), new Point(0,1)},
-            {new Point(-2,0), new Point(-1,0), new Point(0,0), new Point(1,0)}
+            {{0, -2}, {0, -1}, {0, 0}, {0, 1}},
+            {{-2, 0}, {-1, 0}, {0, 0}, {1, 0}},
+            {{0, -2}, {0, -1}, {0, 0}, {0, 1}},
+            {{-2, 0}, {-1, 0}, {0, 0}, {1, 0}}
         },
         {
-            {new Point(0, -1), new Point(0, 0), new Point(0, 1), new Point(-1, 0)},
-            {new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(0, 1)},
-            {new Point(0, -1), new Point(0, 0), new Point(0, 1), new Point(1, 0)},
-            {new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(0, -1)}
+            {{0, -1}, {0, 0}, {0, 1}, {-1, 0}},
+            {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
+            {{0, -1}, {0, 0}, {0, 1}, {1, 0}},
+            {{-1, 0}, {0, 0}, {1, 0}, {0, -1}}
         }
     };
 
@@ -93,7 +95,8 @@ class Tetromino {
     Point[] getTiles(){
         Point[] tiles = new Point[4];
         for(int i=0; i<4; i++){
-            tiles[i] = new Point(tileConfig[type.ordinal()][index][i]);
+            tiles[i] = new Point(tileConfig[type.ordinal()][index][i][0],
+                tileConfig[type.ordinal()][index][i][1]);
             tiles[i].translate(row, column);
         }
         return tiles;
