@@ -24,7 +24,7 @@ public class App extends Application implements EventHandler {
     public static final int WINDOW_WIDTH = 1000;
     public static final int WINDOW_HEIGHT = 1000;
     private Scene scene;
-    private List<TetrisGUI> games;
+    private List<GameGUI> games;
 
     private TabPane mainTabs;
     public App(){
@@ -32,7 +32,7 @@ public class App extends Application implements EventHandler {
     }
 
     public void start (Stage stage){
-        games = new ArrayList<TetrisGUI>();
+        games = new ArrayList<GameGUI>();
 
         Button gameBtn = new Button("Start");
         gameBtn.setOnAction(this);

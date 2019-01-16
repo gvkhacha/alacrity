@@ -12,8 +12,7 @@ import com.gvkhacha.tetris.Block;
   * 
   *
   */
-public class TetrisGUI extends Pane implements EventHandler<KeyEvent>{
-    private final GameCanvas canvas;
+public class TetrisGUI extends GameGUI{
     private Tetris game;
     private static final double BOARD_MARGIN_X = 0.15;
     private static final double BOARD_MARGIN_Y = 0.10;
@@ -27,30 +26,22 @@ public class TetrisGUI extends Pane implements EventHandler<KeyEvent>{
     TetrisGUI(){
         super();
         game = new Tetris();
-
-        canvas = new GameCanvas();
-        getChildren().add(canvas);
-        canvas.widthProperty().bind(widthProperty());
-        canvas.heightProperty().bind(heightProperty());
-
         redraw();
     }
 
     public void handle(KeyEvent ke) {
       game.update();
-      redraw();
-      canvas.draw();
+      super.handle(ke);
     }
 
-    private void redraw(){
-      canvas.clear();
+    void redraw(){
       redraw_decorations();
       redraw_board();
-
+      super.redraw();
     }
 
     private void redraw_decorations(){
-      canvas.addRect(board, board_fill);
+      super.addToCanvas(board, board_fill);
     }
 
     private void redraw_board(){
@@ -87,7 +78,7 @@ public class TetrisGUI extends Pane implements EventHandler<KeyEvent>{
               color = Color.RED;
           }
           Rectangle rect = new Rectangle(BOARD_MARGIN_X + (DX * c), BOARD_MARGIN_Y + (DY * r), DX, DY);
-          canvas.addRect(rect, color);
+          super.addToCanvas(rect, color);
         }
       }
     }
