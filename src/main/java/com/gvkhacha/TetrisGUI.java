@@ -4,7 +4,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
+import javafx.util.Duration;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
 import com.gvkhacha.tetris.Tetris;
 import com.gvkhacha.tetris.Block;
 
@@ -27,11 +32,30 @@ public class TetrisGUI extends GameGUI {
         super();
         game = new Tetris();
         redraw();
+
+        Timeline gameTick = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                game.update();
+                redraw();
+            }
+        }));
+        gameTick.setCycleCount(Timeline.INDEFINITE);
+        gameTick.play();
+
     }
 
+
     public void handle(KeyEvent ke) {
-        game.update();
-        super.handle(ke);
+        if(ke.getCode() == KeyCode.A)
+            game.moveLeft();
+        else if (ke.getCode() == KeyCode.D)
+            game.moveRight();
+        else if (ke.getCode() == KeyCode.W)
+            game.rotateRight();
+        else if (ke.getCode() == KeyCode.S)
+            game.rotateLeft();
+        redraw();
     }
 
     void redraw() {

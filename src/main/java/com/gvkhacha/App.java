@@ -58,6 +58,7 @@ public class App extends Application implements EventHandler {
 
         mainTabs.getSelectionModel().selectedItemProperty().addListener(
         new ChangeListener<Tab>() {
+            // This should also pause/resume the games in other tabs. 
             @Override
             public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
                 int index = mainTabs.getSelectionModel().getSelectedIndex();

@@ -31,7 +31,6 @@ class Tetromino {
     private Type type;
     //
     private static final List<Type> BLOCK_TYPES = Collections.unmodifiableList(Arrays.asList(Type.values()));
-    private static final int TYPES_SIZE = BLOCK_TYPES.size();
     private static final Random rand = new Random();
     // All tile configs for each block lies here. Index is corresponding to Type enum.
     // First index is the row, second index is the column difference.
@@ -89,7 +88,7 @@ class Tetromino {
         frozen = false;
         column = Tetris.NUM_COLUMNS / 2;
         row = 0;
-        type = BLOCK_TYPES.get(rand.nextInt(2));
+        type = BLOCK_TYPES.get(rand.nextInt(BLOCK_TYPES.size()));
         index = 0;
     }
 

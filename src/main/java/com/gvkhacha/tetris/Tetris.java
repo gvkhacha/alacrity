@@ -27,7 +27,12 @@ public class Tetris {
             Block fallerColor = Block.values()[1 + faller.getIntType()];
             Point[] tiles = this.faller.getTiles();
             for(Point p : tiles) {
-                this.board[(int)p.getX()][(int)p.getY()] = fallerColor;
+                int x = (int) p.getX();
+                int y = (int) p.getY();
+                if(x < 0){
+                    // Game over!
+                }
+                this.board[x][y] = fallerColor;
             }
             this.faller = new Tetromino();
         } else {
@@ -45,9 +50,10 @@ public class Tetris {
         nextFaller.update();
         Point[] tiles = nextFaller.getTiles();
         for(Point p : tiles) {
-            if(this.board[(int)p.getX()][(int)p.getY()] != Block.EMPTY) {
+            int x = (int) p.getX();
+            int y = (int) p.getY();
+            if(x == Tetris.NUM_ROWS || (x >= 0 && this.board[x][y] != Block.EMPTY))
                 return true;
-            }
         }
         return false;
     }
@@ -64,5 +70,29 @@ public class Tetris {
                 return Block.values()[1 + faller.getIntType()];
         }
         return this.board[r][c];
+    }
+
+    public void moveLeft(){
+        for(Point p : this.faller.getTiles()) {
+            if((int) p.getY() <= 0)
+                return;
+        }
+        this.faller.moveLeft();
+    }
+
+    public void moveRight(){
+        for(Point p : this.faller.getTiles()) {
+            if((int) p.getY() >= NUM_COLUMNS - 1)
+                return;
+        }
+        this.faller.moveRight();
+    }
+
+    public void rotateLeft(){
+        this.faller.rotateLeft();
+    }
+
+    public void rotateRight(){
+        this.faller.rotateRight();
     }
 }
