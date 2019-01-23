@@ -47,14 +47,17 @@ public class TetrisGUI extends GameGUI {
 
 
     public void handle(KeyEvent ke) {
-        if(ke.getCode() == KeyCode.A)
+        KeyCode c = ke.getCode();
+        if(c.equals(KeyCode.A))
             game.moveLeft();
-        else if (ke.getCode() == KeyCode.D)
+        else if(c.equals(KeyCode.D))
             game.moveRight();
-        else if (ke.getCode() == KeyCode.W)
-            game.rotateRight();
-        else if (ke.getCode() == KeyCode.S)
+        else if(c.equals(KeyCode.W))
             game.rotateLeft();
+        else if(c.equals(KeyCode.S))
+            game.rotateRight();
+        else if(c.equals(KeyCode.Z))
+            game.update();
         redraw();
     }
 

@@ -1,5 +1,7 @@
 package com.gvkhacha.tetris;
 import java.awt.Point;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Tetris {
     public static int NUM_ROWS = 20;
@@ -38,6 +40,7 @@ public class Tetris {
         } else {
             this.faller.update();
         }
+        checkRowClear();
     }
 
     /**
@@ -95,4 +98,41 @@ public class Tetris {
     public void rotateRight(){
         this.faller.rotateRight();
     }
+
+    private void checkRowClear(){
+        List<Integer> moveDownRows = new ArrayList<Integer>();
+        for(int r=0; r<NUM_ROWS; r++){
+            if(clearRowAt(r))
+                moveDownRows.add(r);
+        }
+
+        for(int row : moveDownRows){
+            System.out.println(row);
+            moveDownFromRow(row);
+        }
+    }
+
+    private boolean clearRowAt(int r){
+        for(int c=0; c<NUM_COLUMNS; c++){
+            if(this.board[r][c] == Block.EMPTY)
+                return false;
+        }
+        for(int c=0; c<NUM_COLUMNS; c++){
+            this.board[r][c] = Block.EMPTY;
+        }
+        return true;
+    }
+
+    private void moveDownFromRow(int row){
+        for(int r = row; r>1; r--){
+            for(int c=0; c<NUM_COLUMNS; c++){
+                this.board[r][c] = this.board[r-1][c];
+            }
+        }
+    }
+
+    // private void checkSideCollisions(Callable func){
+    //     Tetromino nextFaller = new Tetromino(this.faller);
+    //     nextFaller.
+    // }
 }
