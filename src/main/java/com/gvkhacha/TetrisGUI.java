@@ -19,6 +19,8 @@ import com.gvkhacha.tetris.Block;
   */
 public class TetrisGUI extends GameGUI {
     private Tetris game;
+    private Timeline gameTick;
+    private boolean paused;
     private static final double BOARD_MARGIN_X = 0.15;
     private static final double BOARD_MARGIN_Y = 0.10;
     private static final double BOARD_X = 1 - (2 * BOARD_MARGIN_X);
@@ -33,7 +35,7 @@ public class TetrisGUI extends GameGUI {
         game = new Tetris();
         redraw();
 
-        Timeline gameTick = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+        gameTick = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 game.update();
@@ -42,6 +44,7 @@ public class TetrisGUI extends GameGUI {
         }));
         gameTick.setCycleCount(Timeline.INDEFINITE);
         gameTick.play();
+        paused = false;
 
     }
 
@@ -60,6 +63,12 @@ public class TetrisGUI extends GameGUI {
             game.update();
         else if(c.equals(KeyCode.SPACE))
             game.hardDrop();
+        else if(c.equals(KeyCode.ESCAPE))
+            if(paused)
+                gameTick.play();
+            else
+                gameTick.pause();
+            paused = !paused;
         redraw();
     }
 
