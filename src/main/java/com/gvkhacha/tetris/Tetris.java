@@ -23,8 +23,10 @@ public class Tetris {
       * Continue one tick of the game model
       * if the next tick of the faller will collide with any block on the board
       * the blocks are frozen and placed in the board, and a new faller is made.
+      * @return true if a new faller is made
       */
-    public void update() {
+    public boolean update() {
+        boolean flag = false;
         if(checkCollisions()) {
             Block fallerColor = Block.values()[1 + faller.getIntType()];
             Point[] tiles = this.faller.getTiles();
@@ -37,10 +39,12 @@ public class Tetris {
                 this.board[x][y] = fallerColor;
             }
             this.faller = new Tetromino();
+            flag = true;
         } else {
             this.faller.update();
         }
         checkRowClear();
+        return flag;
     }
 
     /**
@@ -97,6 +101,13 @@ public class Tetris {
 
     public void rotateRight(){
         this.faller.rotateRight();
+    }
+
+    public void hardDrop(){
+        while(true){
+            if(update())
+                return;
+        }
     }
 
     private void checkRowClear(){

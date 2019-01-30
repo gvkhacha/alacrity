@@ -58,6 +58,8 @@ public class TetrisGUI extends GameGUI {
             game.rotateRight();
         else if(c.equals(KeyCode.Z))
             game.update();
+        else if(c.equals(KeyCode.SPACE))
+            game.hardDrop();
         redraw();
     }
 
