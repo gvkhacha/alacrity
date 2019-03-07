@@ -17,6 +17,14 @@ public class GameState{
 		players.add(new Player());
 	}
 
+	GameState(String... names){
+		this.numPlayers = names.length;
+		players = new ArrayList<Player>(this.numPlayers);
+		for(String n : names){
+			players.add(new Player(n));
+		}
+	}
+
 	public int getNumPlayers(){
 		return this.numPlayers;
 	}
@@ -47,21 +55,22 @@ class GridGameState extends GameState{
 
 	private int numRows;
 	private int numCols;
-	private Piece[][] grid;
+	private Board board;
 
 	GridGameState(){
+		super();
 		this(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS);
 	}
 
 	GridGameState(int rows, int cols){
+		super();
 		this.numRows = rows;
 		this.numCols = cols;
-		this.createEmptyGrid();
+		this.board = new Board(rows, cols);
 	}
 
-	private void createEmptyGrid(){
-		this.grid = new Piece[this.numRows][this.numCols];
-
+	GridGameState(int rows, int cols, String... names){
+		super(names);
+		this(rows, cols);
 	}
-
 }
